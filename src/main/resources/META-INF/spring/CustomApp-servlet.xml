@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+
+    <context:annotation-config/>
+
+    <mvc:annotation-driven/>
+
+    <!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.custom.app"/>
+
+    <bean class="com.custom.app.web.exception.AppWebExceptionResolver"/>
+
+    <!-- MultipartResolver for parsing file uploads, implementation for Commons
+        FileUpload -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <!-- Configurer that sets up a shared FreeMarker (Velocity)Configuration(Velocity)
+        for FreeMarker(Velocity) views -->
+    <bean id="velocityConfig"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="WEB-INF/templates/"/>
+        <property name="configLocation">
+            <value>/WEB-INF/config/velocity.properties</value>
+        </property>
+    </bean>
+
+    <bean id="velocityviewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="exposePathVariables" value="false"/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="viewClass">
+            <value>
+                org.springframework.web.servlet.view.velocity.VelocityView
+            </value>
+        </property>
+        <!--  <property name="toolboxConfigLocation">
+            <value>/WEB-INF/layout/toolbox.xml</value>
+        </property>
+        <property name="layoutUrl" value="/WEB-INF/layout/layout.vm" />
+        <property name="allowSessionOverride" value="true" />
+        <property name="allowRequestOverride" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="requestContextAttribute" value="rc" />
+        <property name="exposeRequestAttributes" value="true" />-->
+    </bean>
+
+    <bean id="jsonViewResolver"
+          class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+        <!-- 重新设置 objectMapper -->
+        <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <!-- 设置objectMapper的serializationConfig的serializationInclusion属性，以忽略null对象 -->
+                <property name="serializationInclusion">
+                    <value>NON_NULL</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="xmlViewResolver"
+          class="org.springframework.web.servlet.view.xml.MarshallingView">
+        <property name="marshaller">
+            <bean class="org.springframework.oxm.castor.CastorMarshaller">
+                <property name="validating" value="false"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- <bean id="sessionInterceptor" class="com.lsqiche.interceptor.SessionInterceptor"/> -->
+
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="true"/>
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="defaultContentType" value="application/json"/>
+        <property name="useJaf" value="false"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="htm" value="text/html"/>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
+            </map>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <!-- 关闭所有的解析器，防止它在查找候选视图时多个解析器都运行 -->
+            <list>
+                <ref bean="velocityviewResolver"/>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <!-- for application/json -->
+                <ref bean="jsonViewResolver"/>
+                <!-- for application/xml -->
+                <ref bean="xmlViewResolver"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

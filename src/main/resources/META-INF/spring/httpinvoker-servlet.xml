@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+           http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd"
+	default-autowire="byName">
+
+
+
+	<!-- 使用Spring的HessianServie做代理
+	<bean name="/dataBaserviceshInvoker"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">-->
+		<!-- service引用具体的实现实体Bean 
+		<property name="service" ref="dataBaservicesImpl" />
+		<property name="serviceInterface" value="com.custom.app.service.DataBaseService" />
+	</bean>-->
+
+	<!-- 可以配置多个HessianServiceExporter代理Bean -->
+
+</beans>

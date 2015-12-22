@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SQL Brower</title>
+	<link rel="stylesheet" type="text/css" href="css/layout-browser.css">
+	<!-- example code -->
+
+	<script type="text/javascript" src="script/extjs/shared/include-ext.js"></script>
+	<script type="text/javascript" src="script/extjs/shared/options-toolbar.js"></script>
+	<script type="text/javascript" src="script/extjs/locale/ext-lang-en.js"></script>
+	<script type="text/javascript" src="script/layout-browser.js"></script>
+	<script type="text/javascript" src="script/extjs/layouts/basic.js"></script>
+	<script type="text/javascript" src="script/extjs/layouts/combination.js"></script>
+	<script type="text/javascript" src="script/extjs/layouts/custom.js"></script>
+
+</head>
+<body>
+  <div style="display:;">
+        <!-- Start page content -->
+        <div id="start-div">
+        </div>
+    </div>
+</body>
+</html>
