@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>       
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">    
+<log4j:configuration>
+	  <appender name="console_appender" class="org.apache.log4j.ConsoleAppender">  
+	   <param name="Target" value="System.out"/>      
+        <layout class="org.apache.log4j.PatternLayout">       
+            <param name="ConversionPattern"   value="%d{yyyy-MM-dd HH\:mm\:ss\:SSS} [%t] [%c.%M(%F:%L)]-[%-5p] %m%n" />
+            <!--<param name="ConversionPattern" value="%d [%X{loginUserEmail}/%X{loginUserID}/%X{remoteAddr}/%X{clientId} - %X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>-->
+        </layout>       
+    </appender>
+    
+    <appender name="info_appender" class="org.apache.log4j.DailyRollingFileAppender">       
+        <param name="File" value="${catalina.base}/logs/customapp.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />         
+        <layout class="org.apache.log4j.PatternLayout">       
+         <param name="ConversionPattern"         
+            value="%d{yyyy-MM-dd HH\:mm\:ss\:SSS} [%t] [%c.%M(%F:%L)]-[%-5p] %m%n" />
+        </layout> 
+        
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="info" />       
+            <param name="levelMax" value="info" />       
+        </filter>          
+    </appender>  
+    
+    <appender name="error_appender" class="org.apache.log4j.DailyRollingFileAppender">       
+        <param name="File" value="${catalina.base}/logs/customapp-error.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />         
+        <layout class="org.apache.log4j.PatternLayout">       
+         <param name="ConversionPattern"         
+            value="%d{yyyy-MM-dd HH\:mm\:ss\:SSS} [%t] [%c.%M(%F:%L)]-[%-5p] %m%n" />
+        </layout>   
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="error" />       
+            <param name="levelMax" value="error" />       
+        </filter>          
+    </appender>   
+    
+     <!-- add by sunwei 在开发时需要打印出sql语句便于高度  在在线环境的情况下 只要比debug级别高就不会打印日志-->
+    <logger name="com.parkmecn" additivity="false">
+    	<level value="debug"/>
+    	<appender-ref ref="console_appender"/>
+    	<appender-ref ref="info_appender"/>    
+        <appender-ref ref="error_appender"/> 
+    </logger>
+    
+    <logger name="com.gson" additivity="false">
+ 		<level value="info"/>
+ 		<appender-ref ref="console_appender"/>
+    	<appender-ref ref="info_appender"/>    
+        <appender-ref ref="error_appender"/> 
+	</logger>
+	<logger  name="org.springframework" additivity="false">
+		<level value="info"/>
+    	<appender-ref ref="console_appender"/>
+    	<appender-ref ref="info_appender"/>    
+        <appender-ref ref="error_appender"/> 
+	</logger>  
+      
+    <root>       
+        <priority value="error" />   
+        <appender-ref ref="console_appender"/>       
+        <appender-ref ref="info_appender"/>    
+        <appender-ref ref="error_appender"/>         
+    </root>   
+</log4j:configuration>

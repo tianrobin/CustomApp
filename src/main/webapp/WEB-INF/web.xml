@@ -29,9 +29,8 @@
 
     <servlet-mapping>
         <servlet-name>CustomApp</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    <!--  Spring 容器启动监听器 -->
     <!-- session 时间设置 -->
     <session-config>
         <session-timeout>30</session-timeout>

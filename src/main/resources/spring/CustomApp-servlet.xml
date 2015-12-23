@@ -13,9 +13,9 @@
     <mvc:annotation-driven/>
 
     <!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
-    <context:component-scan base-package="com.custom.app"/>
+    <context:component-scan base-package="com.custom"/>
 
-    <bean class="com.custom.app.web.exception.AppWebExceptionResolver"/>
+    <!--<bean class="com.custom.app.web.exception.AppWebExceptionResolver"/>-->
 
     <!-- MultipartResolver for parsing file uploads, implementation for Commons
         FileUpload -->
