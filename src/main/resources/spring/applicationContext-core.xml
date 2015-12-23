@@ -71,7 +71,7 @@
 	<!-- 那些类的哪些方法参与事务 -->
 	<aop:config>
 		<aop:pointcut id="allManagerMethod"
-			expression="execution(* com.custom.app.biz.*.*(..))" />
+			expression="execution(* com.custom.biz.*.*(..))" />
 		<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice" />
 	</aop:config>
 </beans>
