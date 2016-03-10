@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <!-- <Property name="filePattern">Log/${projectPrefix}-%i.log</Property> -->
+    </Properties>
+    <Appenders>
+        <RollingFile name="info_appender" fileName="${sys:catalina.home}/logs/park-serviceapi.log"
+                     filePattern="${sys:catalina.home}/logs/park-serviceapi-%d{yyyy-MM-dd}-%i.log"
+                     append="true">
+            <PatternLayout charset="UTF-8"
+                           pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %5p %C.%M(%L) | %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <RollingFile name="error_appender" fileName="${sys:catalina.home}/logs/park-serviceapi-error.log"
+                     filePattern="${sys:catalina.home}/logs/park-serviceapi-error-%d{yyyy-MM-dd}-%i.log"
+                     append="true">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout charset="UTF-8"
+                           pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %5p %C.%M(%L) | %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <Console name="console_appender" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8"
+                           pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%t] %5p %C.%M(%L) | %m%n"/>
+        </Console>
+    </Appenders>
+
+    <loggers>
+        <!-- 3rdparty Loggers -->
+        <logger name="org.springframework.core" level="info"/>
+        <logger name="org.springframework.beans" level="info"/>
+        <logger name="org.springframework.context" level="info"/>
+        <logger name="org.springframework.web" level="info"/>
+        <logger name="org.jboss.netty" level="warn"/>
+        <logger name="org.apache.http" level="warn"/>
+        <logger name="com.mchange.v2" level="warn"/>
+        <logger name="com.custom" level="debug"/>
+        <!-- Root Logger -->
+        <root level="DEBUG">
+            <appender-ref ref="DevLog"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </loggers>
+</Configuration>

@@ -1,49 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
-           http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
-	default-autowire="byName">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+       default-autowire="byName">
 
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+    <context:annotation-config/>
 
-	<!--&lt;!&ndash; rmi &ndash;&gt;-->
-	<!--&lt;!&ndash; 接口的具体实现类 &ndash;&gt;-->
-	<!--<bean id="dataBaservicesImpl" class="com.custom.app.service.impl.DataBaseServiceImpl" />-->
+    <!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.custom"/>
 
- 	<!--<jaxws:endpoint id="dataBaservicesImplservice"-->
-		<!--implementor="com.custom.app.service.impl.DataBaseServiceImpl" address="/remoteDataBaseService" />-->
-		<!---->
-	<!--<jaxws:server id="dataBaservicesImplservice" serviceClass="com.custom.app.service.DataBaseService" address="/remoteDataBaseService">-->
-		<!--<jaxws:serviceBean >-->
-			<!--<ref bean="dataBaservicesImpl"/>-->
-		 <!--</jaxws:serviceBean>-->
-	<!--</jaxws:server>-->
-
-	<!-- <jaxws:client id="dataBaseServiceclient" serviceClass="com.custom.app.service.DataBaseService"
-		address="http://localhost:8080/CustomApp/services/remoteDataBaseService" /> -->
-
-
-	 <!-- <bean id="remoteRmiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
-		<property name="serviceName">
-			<value>remoteService</value>
-		</property>
-		<property name="service" ref="dataBaservicesImpl" />
-		<property name="serviceInterface">
-			<value>com.custom.app.service.DataBaseService</value>
-		</property>
-		<property name="registryPort">
-			<value>9400</value>
-		</property>
-		<property name="servicePort">
-			<value>9401</value>
-		</property>
-	</bean> -->
-	
 </beans>

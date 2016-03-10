@@ -53,19 +53,19 @@
     <!-- hibernate集成拦截器 -->
     <filter>
         <filter-name>hibernateFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
         <init-param>
-            <param-name>sessionFactoryBeanName</param-name>
-            <param-value>sessionFactory</param-value>
+            <param-name>entityManagerFactoryBeanName</param-name>
+            <param-value>entityManagerFactory</param-value>
         </init-param>
-        <init-param>
-            <param-name>singleSession</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>flushMode</param-name>
-            <param-value>AUTO</param-value>
-        </init-param>
+        <!--<init-param>-->
+            <!--<param-name>singleSession</param-name>-->
+            <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>flushMode</param-name>-->
+            <!--<param-value>AUTO</param-value>-->
+        <!--</init-param>-->
     </filter>
     <filter-mapping>
         <filter-name>hibernateFilter</filter-name>
