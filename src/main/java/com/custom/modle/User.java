@@ -7,6 +7,7 @@ import com.custom.type.custom.GenderEnum;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.FetchType;
 
 /**
  * Created by robin.tian on 16-3-10.
@@ -52,7 +53,7 @@ public class User extends BaseObject {
     private OsTypeEnum osType;
 
 
-    @OneToMany(targetEntity = UserCar.class,mappedBy = "user")
+    @OneToMany(targetEntity = UserCar.class,fetch = FetchType.EAGER,mappedBy = "user")
     private List<UserCar> userCars;
 
     public static long getSerialVersionUID() {

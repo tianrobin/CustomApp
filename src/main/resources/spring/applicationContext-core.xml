@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-
+           http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-4.1.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd"
        default-autowire="byName">
-    <!-- Hibernate4 -->
+
     <!-- 加载资源文件 其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载 -->
     <context:property-placeholder location="classpath:persistence-mysql.properties"/>
 
@@ -76,9 +77,10 @@
 
 
     <!-- Spring Data Jpa配置 -->
-    <!--
-    <jpa:repositories base-package="cn.ibeans"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
-    -->
+    <!--    -->
+
+    <!--<jpa:repositories base-package="com.custom"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>-->
+
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
@@ -92,20 +94,21 @@
     <!--</bean>-->
 
 
-    <!--&lt;!&ndash; 配置事务的传播特性 &ndash;&gt;-->
+    <!-- 配置事务的传播特性 -->
     <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-    <!--<tx:attributes>-->
-    <!--<tx:method name="add*" propagation="REQUIRED"/>-->
-    <!--<tx:method name="del*" propagation="REQUIRED"/>-->
-    <!--<tx:method name="modify*" propagation="REQUIRED"/>-->
-    <!--<tx:method name="*" read-only="false"/>-->
-    <!--</tx:attributes>-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="del*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="modify*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="*" read-only="false"/>-->
+        <!--</tx:attributes>-->
     <!--</tx:advice>-->
 
-    <!--&lt;!&ndash; 那些类的哪些方法参与事务 &ndash;&gt;-->
+    <!-- 那些类的哪些方法参与事务 -->
     <!--<aop:config>-->
-    <!--<aop:pointcut id="allManagerMethod"-->
-    <!--expression="execution(* com.custom.biz.*.*(..))"/>-->
-    <!--<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice"/>-->
+        <!--<aop:pointcut id="allManagerMethod"-->
+                      <!--expression="execution(* com.custom.dao.*.*(..))"/>-->
+        <!--<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice"/>-->
     <!--</aop:config>-->
 </beans>
