@@ -25,10 +25,10 @@ public class UserDaoTest extends AbstractTest {
         user.setCreateTime(new Date());
         user.setDeviceid("Deviceid");
         user.setFristName("FristName");
-        user.setGender(GenderEnum.M);
+        user.setGender(GenderEnum.F);
         user.setNickName("NickName");
         user.setOpenid("openid");
-        user.setOsType(OsTypeEnum.IOS);
+        user.setOsType(OsTypeEnum.ANDROID);
         user.setPassword("Password");
         user.setUpdateTime(new Date());
         user.setUserName("UserName");

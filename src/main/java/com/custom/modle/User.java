@@ -35,6 +35,7 @@ public class User extends BaseObject {
 
 
     @Column(name = "gender",length =1)
+    @Enumerated(value = EnumType.STRING)
     private GenderEnum gender;
 
     @Column(name = "create_time")
@@ -50,6 +51,7 @@ public class User extends BaseObject {
     private String deviceid;
 
     @Column(name="ostype")
+    @Enumerated(value = EnumType.STRING)
     private OsTypeEnum osType;
 
 

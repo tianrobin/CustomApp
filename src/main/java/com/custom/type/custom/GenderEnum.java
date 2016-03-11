@@ -8,9 +8,9 @@ import org.apache.commons.lang.StringUtils;
  */
 public enum GenderEnum implements BaseEnum {
 
-    M("M", "男"),
 
-    F("F", "女"),;
+    F("F", "女"),
+    M("M", "男"),;
 
     private String code;
 
@@ -30,7 +30,6 @@ public enum GenderEnum implements BaseEnum {
         }
         return null;
     }
-
 
 
     public String getCode() {

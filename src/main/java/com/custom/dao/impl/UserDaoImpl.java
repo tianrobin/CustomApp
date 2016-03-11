@@ -32,4 +32,9 @@ public class UserDaoImpl implements UserDao {
         return em.find(User.class,id);
     }
 
+    @Override
+    public User login(String phone, String password) {
+        return null;
+    }
+
 }
