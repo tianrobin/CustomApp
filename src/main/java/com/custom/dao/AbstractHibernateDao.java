@@ -30,10 +30,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements IO
         this.clazz = Preconditions.checkNotNull(clazz);
     }
 
-    protected final Class<T> getClazz() {
-        return clazz;
-    }
-
     protected final EntityManager getEm() {
         return em;
     }

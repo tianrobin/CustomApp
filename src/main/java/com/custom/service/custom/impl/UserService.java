@@ -8,6 +8,7 @@ import com.custom.service.custom.IUserService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by robin.tian on 16-3-16.
@@ -16,7 +17,7 @@ import javax.inject.Inject;
 public class UserService extends AbstractService<User> implements IUserService {
 
     @Inject
-    private IUserDao iUserDao;
+    private IUserDao userDao;
 
     public UserService() {
         super();
@@ -24,6 +25,16 @@ public class UserService extends AbstractService<User> implements IUserService {
 
     @Override
     protected IOperations<User> getDao() {
-        return iUserDao;
+        return userDao;
+    }
+
+    @Override
+    public User findByName(String userName) {
+        return userDao.findByName(userName);
+    }
+
+    @Override
+    public List<User> findUserLikeUserName(String userName) {
+        return userDao.findUserLikeUserName(userName);
     }
 }

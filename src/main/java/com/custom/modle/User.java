@@ -6,13 +6,15 @@ import com.custom.type.custom.GenderEnum;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.FetchType;
 
 /**
  * Created by robin.tian on 16-3-10.
  */
-@Entity(name = "p_user")
+@NamedQueries(value = {
+        @NamedQuery(name = "getUserLikeUserName", query = "select  u from User u where u.userName like :userName")
+})
+@Entity
+@Table(name = "p_user")
 public class User extends BaseObject {
     private static final long serialVersionUID = -3644285261380382399L;
 
@@ -21,7 +23,7 @@ public class User extends BaseObject {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_name", length = 32)
+    @Column(name = "user_name", length = 32, unique = true)
     private String userName;
 
     @Column(name = "password", length = 64)
@@ -34,14 +36,14 @@ public class User extends BaseObject {
     private String fristName;
 
 
-    @Column(name = "gender",length =1)
+    @Column(name = "gender", length = 1)
     @Enumerated(value = EnumType.STRING)
     private GenderEnum gender;
 
     @Column(name = "create_time")
     private Date createTime;
 
-    @Column(name="update_time")
+    @Column(name = "update_time")
     private Date updateTime;
 
     @Column(name = "openid")
@@ -50,18 +52,18 @@ public class User extends BaseObject {
     @Column(name = "deviceid")
     private String deviceid;
 
-    @Column(name="ostype")
+    @Column(name = "ostype")
     @Enumerated(value = EnumType.STRING)
     private OsTypeEnum osType;
 
 
-    @OneToMany(targetEntity = UserCar.class,fetch = FetchType.EAGER,mappedBy = "user")
-    private List<UserCar> userCars;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
+    /**
+     *
+     * @FIXME UserCar 并不是用户必须的重要信息，没有必要查询用户信息的时候就把用户的车辆信息查出来，
+     * 所以可以做一个一对多的单向关联即可，在多的一端进行关联维护
+     */
+//    @OneToMany(targetEntity = UserCar.class, fetch = FetchType.LAZY, mappedBy = "user")
+//    private List<UserCar> userCars =new ArrayList<UserCar>();
     public Long getId() {
         return id;
     }
@@ -150,11 +152,11 @@ public class User extends BaseObject {
         this.osType = osType;
     }
 
-    public List<UserCar> getUserCars() {
-        return userCars;
-    }
-
-    public void setUserCars(List<UserCar> userCars) {
-        this.userCars = userCars;
-    }
+//    public List<UserCar> getUserCars() {
+//        return userCars;
+//    }
+//
+//    public void setUserCars(List<UserCar> userCars) {
+//        this.userCars = userCars;
+//    }
 }

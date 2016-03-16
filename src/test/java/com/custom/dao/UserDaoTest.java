@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import javax.inject.Inject;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by robin.tian on 16-3-11.
@@ -22,23 +23,36 @@ public class UserDaoTest extends AbstractTest {
 
     @Test
     public void test_saveOrUpdate(){
+        for(int i=0;i<10;i++){
         User user = new User();
         user.setCreateTime(new Date());
-        user.setDeviceid("Deviceid");
-        user.setFristName("FristName");
+        user.setDeviceid(i+"Deviceid");
+        user.setFristName(i+"FristName");
         user.setGender(GenderEnum.F);
-        user.setNickName("NickName");
-        user.setOpenid("openid");
+        user.setNickName(i+"NickName");
+        user.setOpenid(i+"openid");
         user.setOsType(OsTypeEnum.ANDROID);
-        user.setPassword("Password");
+        user.setPassword(i+"Password");
         user.setUpdateTime(new Date());
-        user.setUserName("UserName");
-        userService.create(user);
+        user.setUserName(i+"UserName");
+        userService.create(user);}
     }
 
     @Test
     public void test_getUserById(){
-        User user =userService.findOne(1l);
+        User user =userService.findOne(15l);
         System.out.println(user);
+    }
+
+    @Test
+    public void test_GetUserbyUserName(){
+        User user =userService.findByName("1UserName");
+        System.out.println(user);
+    }
+
+    @Test
+    public void test_findUserLikeUserName(){
+        List<User> userList = userService.findUserLikeUserName("%Name%");
+        System.out.println(userList);
     }
 }
