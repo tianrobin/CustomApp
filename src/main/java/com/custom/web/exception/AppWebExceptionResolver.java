@@ -3,8 +3,8 @@ package com.custom.web.exception;
 import com.custom.common.exception.AppBizException;
 import com.custom.common.exception.AppErrCodeEnums;
 import com.custom.common.exception.AppRTException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AppWebExceptionResolver implements HandlerExceptionResolver {
 
-    private Logger logger = LoggerFactory.getLogger(AppWebExceptionResolver.class);
+    private Logger logger = LogManager.getLogger(AppWebExceptionResolver.class);
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object obj, Exception e) {
