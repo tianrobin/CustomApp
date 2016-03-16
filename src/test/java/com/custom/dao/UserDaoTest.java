@@ -1,8 +1,9 @@
 package com.custom.dao;
 
 import com.custom.AbstractTest;
-import com.custom.dao.impl.UserDaoImpl;
+import com.custom.dao.custom.IUserDao;
 import com.custom.modle.User;
+import com.custom.service.custom.IUserService;
 import com.custom.type.channel.OsTypeEnum;
 import com.custom.type.custom.GenderEnum;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import java.util.Date;
 public class UserDaoTest extends AbstractTest {
 
     @Inject
-    private UserDao userDao;
+    private IUserService userService;
 
 
     @Test
@@ -32,12 +33,12 @@ public class UserDaoTest extends AbstractTest {
         user.setPassword("Password");
         user.setUpdateTime(new Date());
         user.setUserName("UserName");
-        userDao.saveOrUpdate(user);
+        userService.create(user);
     }
 
     @Test
     public void test_getUserById(){
-        User user =userDao.getUserById(1l);
+        User user =userService.findOne(1l);
         System.out.println(user);
     }
 }
