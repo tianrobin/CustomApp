@@ -1,4 +1,4 @@
-package com.custom.modle;
+package com.custom.modle.custom;
 
 import javax.persistence.*;
 
@@ -15,7 +15,7 @@ public class UserCar {
     private Long id;
 
     @ManyToOne(targetEntity = User.class)
-    @PrimaryKeyJoinColumn(name = "uid")
+    @JoinColumn(name = "uid")
     private User user;
 
     @Column(name="car_no")

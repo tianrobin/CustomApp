@@ -2,7 +2,7 @@ package com.custom.service.custom.impl;
 
 import com.custom.common.IOperations;
 import com.custom.dao.custom.IUserDao;
-import com.custom.modle.User;
+import com.custom.modle.custom.User;
 import com.custom.service.AbstractService;
 import com.custom.service.custom.IUserService;
 import org.springframework.stereotype.Service;
@@ -36,5 +36,10 @@ public class UserService extends AbstractService<User> implements IUserService {
     @Override
     public List<User> findUserLikeUserName(String userName) {
         return userDao.findUserLikeUserName(userName);
+    }
+
+    @Override
+    public User login(String user, String code) {
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package com.custom.dao.custom;
 
 import com.custom.common.IOperations;
-import com.custom.modle.User;
+import com.custom.modle.custom.User;
 
 import java.util.List;
 
@@ -15,5 +15,7 @@ public interface IUserDao extends IOperations<User> {
 
 
     List<User> findUserLikeUserName(String userName);
+
+
 
 }

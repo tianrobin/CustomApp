@@ -2,7 +2,7 @@ package com.custom.dao.custom.impl;
 
 import com.custom.dao.AbstractHibernateDao;
 import com.custom.dao.custom.IUserDao;
-import com.custom.modle.User;
+import com.custom.modle.custom.User;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

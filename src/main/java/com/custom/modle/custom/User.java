@@ -1,4 +1,4 @@
-package com.custom.modle;
+package com.custom.modle.custom;
 
 import com.custom.common.BaseObject;
 import com.custom.type.channel.OsTypeEnum;
@@ -55,6 +55,9 @@ public class User extends BaseObject {
     @Column(name = "ostype")
     @Enumerated(value = EnumType.STRING)
     private OsTypeEnum osType;
+
+    @OneToOne(targetEntity = UserAccessToken.class,mappedBy = "user",cascade = CascadeType.ALL)
+    private UserAccessToken token;
 
 
     /**
@@ -159,4 +162,12 @@ public class User extends BaseObject {
 //    public void setUserCars(List<UserCar> userCars) {
 //        this.userCars = userCars;
 //    }
+
+    public UserAccessToken getToken() {
+        return token;
+    }
+
+    public void setToken(UserAccessToken token) {
+        this.token = token;
+    }
 }

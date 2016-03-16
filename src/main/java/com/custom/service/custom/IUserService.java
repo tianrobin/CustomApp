@@ -1,7 +1,7 @@
 package com.custom.service.custom;
 
 import com.custom.common.IOperations;
-import com.custom.modle.User;
+import com.custom.modle.custom.User;
 
 import java.util.List;
 
@@ -14,4 +14,8 @@ public interface IUserService extends IOperations<User> {
     User findByName(String userName);
 
     List<User> findUserLikeUserName(String userName);
+
+    User login(String user,String code);
+
+
 }
