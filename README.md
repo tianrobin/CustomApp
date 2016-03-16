@@ -1,4 +1,4 @@
-# String MVC Spring JPA HiberNate 集成示例
+# String MVC + Spring + JPA + HiberNate 集成示例
 
 
 **作者： robin.tian**
