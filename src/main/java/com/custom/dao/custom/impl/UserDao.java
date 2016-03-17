@@ -2,7 +2,8 @@ package com.custom.dao.custom.impl;
 
 import com.custom.dao.AbstractHibernateDao;
 import com.custom.dao.custom.IUserDao;
-import com.custom.modle.User;
+import com.custom.modle.custom.User;
+import com.custom.modle.custom.UserAccessToken;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,4 +43,11 @@ public class UserDao extends AbstractHibernateDao<User> implements IUserDao {
         query.setParameter("userName", "%"+userName+"%");
         return query.getResultList();
     }
+//
+//    @Override
+//    public User register(String userName) {
+//        User user =new User().setUserName(userName).setToken(new UserAccessToken());
+//        this.create(user);
+//        return user;
+//    }
 }

@@ -1,4 +1,6 @@
-package com.custom.modle;
+package com.custom.modle.custom;
+
+import com.custom.common.BaseObject;
 
 import javax.persistence.*;
 
@@ -7,21 +9,23 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "p_user_car")
-public class UserCar {
+public class UserCar extends BaseObject {
+
+    private static final long serialVersionUID = -3544087223977755021L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name =  "id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(targetEntity = User.class)
-    @PrimaryKeyJoinColumn(name = "uid")
+    @JoinColumn(name = "uid")
     private User user;
 
-    @Column(name="car_no")
+    @Column(name = "car_no")
     private String carNo;
 
-    @Column(name="car_name")
+    @Column(name = "car_name")
     private String carName;
 
     @Column(name = "car_color")
@@ -32,39 +36,44 @@ public class UserCar {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserCar setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public UserCar setUser(User user) {
         this.user = user;
+        return this;
     }
 
     public String getCarNo() {
         return carNo;
     }
 
-    public void setCarNo(String carNo) {
+    public UserCar setCarNo(String carNo) {
         this.carNo = carNo;
+        return this;
     }
 
     public String getCarName() {
         return carName;
     }
 
-    public void setCarName(String carName) {
+    public UserCar setCarName(String carName) {
         this.carName = carName;
+        return this;
     }
 
     public String getCarColor() {
         return carColor;
     }
 
-    public void setCarColor(String carColor) {
+    public UserCar setCarColor(String carColor) {
         this.carColor = carColor;
+        return this;
     }
 }

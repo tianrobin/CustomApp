@@ -3,13 +3,16 @@ package com.custom.service;
 import com.custom.common.IOperations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by robin.tian on 16-3-16.
  */
+@Transactional
 public abstract class AbstractService<T extends Serializable> implements IOperations<T>{
 
     private Logger logger = LogManager.getLogger(AbstractService.class);

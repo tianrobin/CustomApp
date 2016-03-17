@@ -8,6 +8,8 @@ import com.custom.common.BaseEnum;
 public enum OsTypeEnum implements BaseEnum {
 
 
+    UNKNOWN,
+
     ANDROID,
 
     IOS,

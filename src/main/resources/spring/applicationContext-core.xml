@@ -86,7 +86,7 @@
     <!--<jpa:repositories base-package="com.custom"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>-->
 
     <!-- 使用annotation定义事务 -->
-    <!--<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 
     <!-- 直接使用Spring的 JpaTemplate -->
@@ -98,22 +98,26 @@
     <!--</bean>-->
 
 
-    <!-- 配置事务的传播特性 -->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="create*" propagation="REQUIRED"/>
-            <tx:method name="del*" propagation="REQUIRED"/>
-            <tx:method name="modify*" propagation="REQUIRED"/>
-            <tx:method name="*" read-only="false"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--摒弃如下配置原因有如下两种：-->
+    <!--1.方法名不许再下面做匹配在可以织入事物操作-->
+    <!--2.aop的切面execution(* com.custom.service..*.*(..) 不灵活，不支持子目录-->
+    <!--&lt;!&ndash; 配置事务的传播特性 &ndash;&gt;-->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="create*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="del*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="modify*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="*" read-only="false"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
 
-    <!-- 那些类的哪些方法参与事务 -->
-    <aop:config>
-        <aop:pointcut id="allManagerMethod"
-                      expression="execution(* com.custom.service.*.*(..))"/>
-        <aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice"/>
-    </aop:config>
+    <!--&lt;!&ndash; 那些类的哪些方法参与事务 &ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="allManagerMethod" expression="execution(* com.custom.service..*.*(..))"/>-->
+        <!--<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice"/>-->
+        <!--<aop:pointcut id="subPackageMethod" expression="execution(* com.custom.service.*.*.*(..))"/>-->
+        <!--<aop:advisor pointcut-ref="subPackageMethod" advice-ref="txAdvice"/>-->
+    <!--</aop:config>-->
 </beans>
