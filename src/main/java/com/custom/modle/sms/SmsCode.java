@@ -19,7 +19,7 @@ public class SmsCode extends BaseObject {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "phone")
+    @Column(name = "phone", unique = true)
     private String phone;
 
     @Column(name = "code")
@@ -31,6 +31,14 @@ public class SmsCode extends BaseObject {
     @Column(name = "create_time")
     private Date createTime = new Date();
 
+    @Column(name = "update_time")
+    private Date updateTime=new Date();
+
+    @Column(name = "total_sum")
+    private int totalSum=0;
+
+    @Column(name = "tody_sum")
+    private int todySum=0;
 
     public long getId() {
         return id;
@@ -74,6 +82,33 @@ public class SmsCode extends BaseObject {
 
     public SmsCode setCreateTime(Date createTime) {
         this.createTime = createTime;
+        return this;
+    }
+
+    public int getTotalSum() {
+        return totalSum;
+    }
+
+    public SmsCode setTotalSum(int totalSum) {
+        this.totalSum = totalSum;
+        return this;
+    }
+
+    public int getTodySum() {
+        return todySum;
+    }
+
+    public SmsCode setTodySum(int todySum) {
+        this.todySum = todySum;
+        return this;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public SmsCode setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
         return this;
     }
 }

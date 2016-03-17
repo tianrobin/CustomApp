@@ -16,6 +16,7 @@ public enum AppErrCodeEnums implements Errorcode {
 
     ERR_SYS_ILLEGAL_ARGUMENT("非法的请求参数"),
 
+    ERR_BIZ_SMS_CODE_SEND_NUM_TO_MUCH("短信验证码获取次数已达到峰值"),
     ;
 
 
