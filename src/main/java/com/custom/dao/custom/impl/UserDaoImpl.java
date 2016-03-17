@@ -1,9 +1,7 @@
 package com.custom.dao.custom.impl;
 
 import com.custom.dao.AbstractHibernateDao;
-import com.custom.dao.custom.IUserDao;
 import com.custom.modle.custom.User;
-import com.custom.modle.custom.UserAccessToken;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,10 +14,10 @@ import java.util.List;
  * Created by robin.tian on 16-3-11.
  */
 @Repository
-public class UserDao extends AbstractHibernateDao<User> implements IUserDao {
-    Logger logger = LogManager.getLogger(UserDao.class);
+public class UserDaoImpl extends AbstractHibernateDao<User> implements com.custom.dao.custom.UserDao {
+    Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
-    public UserDao() {
+    public UserDaoImpl() {
         setClazz(User.class);
     }
 

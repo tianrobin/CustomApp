@@ -56,7 +56,7 @@ public class User extends BaseObject {
     @Enumerated(value = EnumType.STRING)
     private OsTypeEnum osType;
 
-    @OneToOne(targetEntity = UserAccessToken.class, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(targetEntity = UserAccessToken.class,fetch =FetchType.LAZY ,mappedBy = "user", cascade = CascadeType.ALL)
     private UserAccessToken token;
 
 

@@ -22,15 +22,15 @@ public class UserAccessToken extends BaseObject {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(targetEntity = User.class)
-    @JoinColumn(name = "uid")
+    @OneToOne(targetEntity = User.class,fetch = FetchType.LAZY)
+    @JoinColumn(name = "uid",unique = true,nullable = false)
     private User user;
 
     @Column(name = "token")
     private String token = StringUtils.replace(UUID.randomUUID().toString(),"-","").toUpperCase();
 
     @Column(name = "expire")
-    private int expire=7*60*60;
+    private int expire=7*60*60*24;
 
     @Column(name = "create_time")
     private Date createTime=new Date();

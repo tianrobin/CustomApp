@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by robin.tian on 16-3-10.
  */
-public interface IUserDao extends IOperations<User> {
+public interface UserDao extends IOperations<User> {
 
 
     User findByName(String userName);

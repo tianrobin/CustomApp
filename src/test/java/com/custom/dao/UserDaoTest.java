@@ -3,7 +3,7 @@ package com.custom.dao;
 import com.custom.AbstractTest;
 import com.custom.modle.custom.User;
 import com.custom.modle.custom.UserAccessToken;
-import com.custom.service.custom.IUserService;
+import com.custom.service.custom.UserService;
 import com.custom.type.channel.OsTypeEnum;
 import com.custom.type.custom.GenderEnum;
 import org.apache.commons.lang.StringUtils;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class UserDaoTest extends AbstractTest {
 
     @Inject
-    private IUserService userService;
+    private UserService userService;
 
     @Test
     public void test_saveOrUpdate() {

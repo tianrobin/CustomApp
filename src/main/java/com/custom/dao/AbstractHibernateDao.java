@@ -36,7 +36,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements IO
 
     @Override
     public T findOne(long id) {
-        logger.debug(">>> find Object id is {}",id);
+        logger.debug(">>> find {} id is {}",clazz,id);
         return em.find(clazz, id);
     }
 
@@ -47,25 +47,25 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements IO
 
     @Override
     public void create(T entity) {
-        logger.debug(">>> persist Object in Database: {} ",entity);
+        logger.debug(">>> persist {} in Database: {} ",clazz,entity);
         em.persist(entity);
     }
 
     @Override
     public T update(T entity) {
-        logger.debug(">>>merage Object in Database: {} ",entity);
+        logger.debug(">>>merage {} in Database: {} ",clazz,entity);
         return em.merge(entity);
     }
 
     @Override
     public void delete(T entity) {
-        logger.debug(">>> detach Object in Database: {} ",entity);
+        logger.debug(">>> detach {} in Database: {} ",clazz ,entity);
         em.detach(entity);
     }
 
     @Override
     public void deleteById(long entityId) {
-        logger.debug(">>> detach Object By ID entityId: {} ",entityId);
+        logger.debug(">>> detach {} By ID entityId: {} ",clazz,entityId);
         final T entity = this.findOne(entityId);
         em.detach(entity);
     }
