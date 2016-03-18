@@ -45,9 +45,15 @@ public class SmsServiceImpl implements SmsService {
         facade = SmsSenderFactory.getSmsSender(SmsChannel.DEFAULT);
     }
 
+    /**
+     * 发送短信息，短信息落地数据库
+     * @param phone
+     * @param message
+     */
     @Override
     public void sendMessage(String phone, String message) {
         logger.debug(">>> Send SMS Message Phone={},Message={}", phone, message);
+        //将发送短信验证码的短息保存到数据库中
         SmsMessage smsMessage = new SmsMessage().setSmsMessage(message).setPhone(phone);
         smsMessageDao.create(smsMessage);
         if (!facade.sms(phone, message)) {
@@ -56,24 +62,25 @@ public class SmsServiceImpl implements SmsService {
 
     }
 
+    /**
+     * 发送短信验证码，短信内容格式固定 <br>例如：您本次操作的验证码是：1234，请在输入前确认是您本人操作。
+     * @param phone
+     * @param code
+     */
     @Override
     public void sendCode(String phone, String code) {
-        this.sendCodeProcess(phone, code, new ButildMessage() {
-            @Override
-            public String bulidMessage() {
-                return "您本次操作的验证码是：" + code + "，请在输入前确认是您本人操作";
-            }
-        });
+        this.sendCodeProcess(phone, code, () -> "您本次操作的验证码是：" + code + "，请在输入前确认是您本人操作。");
     }
 
+    /**
+     * 发送短信验证码，短信内容上层决定。本方法里面不对短信内容进行操作
+     * @param phone
+     * @param code
+     * @param message
+     */
     @Override
-    public void sendCode(String phone, String message, String code) {
-        this.sendCodeProcess(phone, code, new ButildMessage() {
-            @Override
-            public String bulidMessage() {
-                return message;
-            }
-        });
+    public void sendCode(String phone, String code, String message) {
+        this.sendCodeProcess(phone, code, () -> message);
     }
 
     private void sendCodeProcess(String phone, String code, ButildMessage butildMessage) {
@@ -88,7 +95,7 @@ public class SmsServiceImpl implements SmsService {
             String today = DateUtils.format(new Date(), "MM-dd");
             String updateTime = DateUtils.format(smsCode.getUpdateTime(), "MM-dd");
             if (StringUtils.equals(today, updateTime)) {
-                smsCode.setTotalSum(smsCode.getTotalSum() + 1);
+                smsCode.setTodySum(smsCode.getTodySum() + 1);
             } else {
                 smsCode.setTodySum(1);
             }
@@ -99,13 +106,8 @@ public class SmsServiceImpl implements SmsService {
         calendar.add(Calendar.HOUR, 1); // 一个小时候后过期
         smsCode.setCode(code).setExpireTime(calendar.getTime());
         smsCodeDao.create(smsCode);
-        //将发送短信验证码的短息保存到数据库中
-        SmsMessage smsMessage = new SmsMessage().setSmsMessage(msg).setPhone(phone);
-        smsMessageDao.create(smsMessage);
         //发送短信
-        if (facade.sms(phone, msg)) {
-            logger.error(">>> SMS Code Sender Error");
-        }
+         sendMessage( phone, msg);
     }
 
     public interface ButildMessage {

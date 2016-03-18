@@ -5,6 +5,7 @@ import com.custom.dao.custom.UserDao;
 import com.custom.modle.custom.User;
 import com.custom.modle.custom.UserAccessToken;
 import com.custom.service.AbstractService;
+import com.custom.service.sms.SmsService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -18,6 +19,9 @@ public class UserServiceImpl extends AbstractService<User> implements com.custom
 
     @Inject
     private UserDao userDao;
+
+    @Inject
+    private SmsService smsService;
 
     public UserServiceImpl() {
         super();
@@ -48,6 +52,12 @@ public class UserServiceImpl extends AbstractService<User> implements com.custom
         User user =new User().setUserName(userName);
         user.setToken(new UserAccessToken().setUser(user));
         userDao.create(user);
+
+        //发送短信
+        if(sendSms){
+            String message="";
+            smsService.sendMessage(userName,message);
+        }
         return user;
     }
 }
