@@ -5,7 +5,6 @@ import com.custom.dao.system.SequenceDao;
 import com.custom.modle.system.Sequence;
 import com.custom.type.SequenceNameEnum;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.Query;
 
