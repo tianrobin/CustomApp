@@ -9,5 +9,5 @@ import com.custom.type.SequenceNameEnum;
  */
 public interface SequenceDao extends IOperations<Sequence> {
 
-    public String getNextSequence(SequenceNameEnum name);
+    String getNextSequence(SequenceNameEnum name);
 }
